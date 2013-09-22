@@ -1,3 +1,3 @@
 SortAndSuite
 ============
-Practice your sorting algo's!
+Practice your sorting algos!

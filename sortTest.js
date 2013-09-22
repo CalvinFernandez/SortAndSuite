@@ -16,14 +16,19 @@ var test = {
 
     console.log(" ----------- Start Test ---------- ")
 
-    var userStart = new Date;
+    var userStart = window.performance.now();
     var userSoln = userFn.call(this, randomCopyUser);
-    var userStop = new Date;
+    var userStop = window.performance.now();
 
-    var ecmaStart = new Date;
+    var ecmaStart = window.performance.now();
     var ecmaSoln = randomCopyECMA.sort(function(a, b) {return a-b}); 
-    var ecmaStop = new Date;
+    var ecmaStop = window.performance.now();
+
+    console.log("%c User Solution time: " + (userStop - userStart) , 'color: #5bc0de');  
+    console.log("%c ECMA Solution time: " + (ecmaStop - ecmaStart) ,'color: #428bca');
     
+    console.log("%c dt " + ( (userStop - userStart) - (ecmaStop - ecmaStart) ), 'color: #f0ad4e');
+
     if (ecmaSoln.length !== userSoln.length) {
       fail = true;
       throw "Arrays are different sizes!";
@@ -36,12 +41,10 @@ var test = {
       }     
     }
     console.log("");
-    console.log("  User Solution: " + userSoln);
-    console.log("  ECMA Solution: " + ecmaSoln);
     console.log("");
 
     if (fail) {
-      console.log( "%c Failed! ", 'color: #c7254e')
+      console.log( "%c Failure! ", 'color: #c7254e')
     } else {
       console.log( "%c Success! ", 'color: #5cb85c');
     }
